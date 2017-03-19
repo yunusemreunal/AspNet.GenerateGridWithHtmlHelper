@@ -1,0 +1,32 @@
+﻿@using CodeForApp.Core.Helpers
+@model IEnumerable<CodeForApp.Core.Services.Dto.Admin.AppListesiPageDto>
+
+@{
+    var gridMenu = new System.Text.StringBuilder();
+
+    gridMenu.Append("<div class='btn-group'>");
+    gridMenu.Append("<a class='btn btn-small btn-success dropdown-toggle btn-demo-space' data-toggle='dropdown' href='#'> İşlemler <span class='caret'></span> </a>");
+    gridMenu.Append("<ul class=dropdown-menu>");
+    gridMenu.Append("<li><a href='/Admin/Cms/AppGuncelle/{0}'><i class='fa fa-paste'></i> Güncelle</a></li>");
+    gridMenu.Append("<li><a href='#' onclick='app.aktifPasif({0});' ><i class='fa fa-paste'></i> Aktif/Pasif</a></li>");
+    gridMenu.Append("<li><a href='#'  onclick='app.gosterGosterme({0});' ><i class='fa fa-paste'></i> Anasayfada Göster / Gösterme</a></li>");
+    gridMenu.Append("<li><a href='/Admin/Cms/UpdateUser/{1}'><i class='fa fa-paste'></i> Ekleyenin Profiline Git</a></li>");
+    gridMenu.Append(" </ul>");
+    gridMenu.Append("</div>");
+}
+
+
+
+@Html.GridHtml(p =>
+{
+
+    p.GridName = "gridAppListeleme";
+    p.RowChangedFunction = "test.test";
+    p.RowChangedParameters = new[] { "AppId", "SenderId" };
+    p.GridMenu = gridMenu.ToString();
+    p.KeyFieldNames = new[] { "AppId", "SenderId" };
+
+}).Bind(Model)
+
+
+<script src="/scripts/datatables22.js" type="text/javascript"></script>
